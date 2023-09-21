@@ -76,7 +76,7 @@ class RecordScreenModule(reactContext: ReactApplicationContext) : ReactContextBa
     hbRecorder!!.setOutputPath(outputUri.toString());
 
     // For FPS and bitrate we need to enable custom settings
-    if (readableMap.hasKey("fps") || readableMap.hasKey("bitrate")) {
+    if (readableMap.hasKey("fps") || readableMap.hasKey("bitrate") || readableMap.hasKey("width") || readableMap.hasKey("height")) {
       hbRecorder!!.enableCustomSettings();
 
       if (readableMap.hasKey("fps")) {
@@ -87,6 +87,11 @@ class RecordScreenModule(reactContext: ReactApplicationContext) : ReactContextBa
         val bitrate = readableMap.getInt("bitrate");
         hbRecorder!!.setVideoBitrate(bitrate);
       }
+	  if(readableMap.hasKey("width") && readableMap.hasKey("height")) {
+		val sWidth = ceil(readableMap.getDouble("width")).toInt();
+		val sHeight = ceil(readableMap.getDouble("height")).toInt();
+        hbRecorder!!.setScreenDimensions(sHeight, sWidth);
+	  }
     }
 
     if (doesSupportEncoder("h264")) {

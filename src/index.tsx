@@ -12,6 +12,8 @@ export type RecordScreenConfigType = {
   fps?: number;
   bitrate?: number;
   mic?: boolean;
+  width?: number;
+  height?: number;
 };
 
 export type RecordingSuccessResponse = {
