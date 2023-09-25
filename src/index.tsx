@@ -34,7 +34,7 @@ export type RecordingResponse =
 
 type RecordScreenNativeModule = {
   setup(
-    config: RecordScreenConfigType & { width: number; height: number }
+    config: RecordScreenConfigType
   ): void;
   startRecording(): Promise<RecordingStartResponse>;
   stopRecording(): Promise<RecordingResponse>;
@@ -47,11 +47,8 @@ const RS = RecordScreen as RecordScreenNativeModule;
 
 class ReactNativeRecordScreenClass {
   private setup(config: RecordScreenConfigType = {}): void {
-    const { width, height } = Dimensions.get('window');
     RS.setup({
       mic: true,
-      width,
-      height,
       fps: 60,
       bitrate: 1920 * 1080 * 144,
       ...config,
